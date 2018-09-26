@@ -23,8 +23,9 @@
     <!-- 启动基于注解的HandlerMapping,可以将请求参数绑定到控制器参数 -->
     <mvc:annotation-driven/>                 
     <!-- 激活@required 等注释 -->
-    <context:annotation-config/>    
-
+    <context:annotation-config/>  
+    <!-- 激活AOP支持 -->  
+	<aop:aspectj-autoproxy />
 
     <!-- 设置使用注解的类所在的jar包 ,DispatcherServlet上下文，只搜索@Controller标记的类-->
     <context:component-scan base-package="com.groupA.alpha.common.controller">
@@ -39,11 +40,12 @@
 			使用order属性排序
 			InternalResourceViewResolver放在最后
     -->
+    <!--   前端使用vue，不使用spring
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/WEB-INF/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-
+	-->
 
 </beans>

@@ -36,8 +36,20 @@
         <groupId>org.springframework</groupId>
         <artifactId>spring-webmvc</artifactId>
         <version>${spring.version}</version>
+        <!-- 不使用spring自带的log配置 -->
+        <exclusions>  
+        <exclusion>  
+            <groupId>commons-logging</groupId>  
+            <artifactId>commons-logging</artifactId>  
+        </exclusion>  
+    </exclusions>  
     </dependency>
-    
+    <!-- 拦截器 -->
+    <dependency> 
+		<groupId>org.aspectj</groupId> 
+		<artifactId>aspectjweaver</artifactId> 
+		<version>1.8.0</version> 
+	</dependency> 
     <!-- mysql驱动包 -->
     <dependency>
 	  <groupId>mysql</groupId>
