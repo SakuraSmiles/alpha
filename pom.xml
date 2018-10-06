@@ -92,18 +92,6 @@
 	</dependency>
   </dependencies>
   <build>
-    <finalName>alpha</finalName>
-    <plugins>
-    	<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-            	<compilerArguments>
-                <!-- 展示所有debug信息，用于在页面上展示接口参数名称 -->
-                	<g />
-                </compilerArguments>
-            </configuration>
-		</plugin>   
-	</plugins> 
+    <finalName>alpha</finalName>   
   </build>
 </project>
