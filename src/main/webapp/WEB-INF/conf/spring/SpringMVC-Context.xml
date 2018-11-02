@@ -40,12 +40,12 @@
 			使用order属性排序
 			InternalResourceViewResolver放在最后
     -->
-    <!--   前端使用vue，不使用spring
+    <!--   前端使用vue，不使用spring -->
+    <!--   仅展示所有接口信息页面使用自带view  -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/"/>
+        <property name="prefix" value="/WEB-INF/view/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-	-->
 
 </beans>

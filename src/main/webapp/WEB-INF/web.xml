@@ -31,7 +31,6 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 		<servlet-name>SpringMVC-dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
 
 
   
