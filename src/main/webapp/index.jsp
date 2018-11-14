@@ -3,9 +3,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <body>
 	<div id="app">
-  		<span v-bind:title="message">
-    	鼠标悬停几秒钟查看此处动态绑定的提示信息！
-  		</span>
+
 	</div>
     <h2>Hello World</h2>
     <h3>
