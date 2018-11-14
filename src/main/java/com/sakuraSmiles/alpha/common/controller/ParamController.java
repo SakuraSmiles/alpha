@@ -1,4 +1,4 @@
-package com.groupA.alpha.common.controller;
+package com.sakuraSmiles.alpha.common.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,8 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import com.groupA.alpha.common.model.RequestMethodItem;
-import com.groupA.alpha.common.model.RequestMethodParameter;
+import com.sakuraSmiles.alpha.common.model.RequestMethodItem;
+import com.sakuraSmiles.alpha.common.model.RequestMethodParameter;
 
 
 

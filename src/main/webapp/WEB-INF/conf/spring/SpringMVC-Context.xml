@@ -28,7 +28,7 @@
 	<aop:aspectj-autoproxy />
 
     <!-- 设置使用注解的类所在的jar包 ,DispatcherServlet上下文，只搜索@Controller标记的类-->
-    <context:component-scan base-package="com.groupA.alpha.common.controller">
+    <context:component-scan base-package="com.sakuraSmiles.alpha.common.controller">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 

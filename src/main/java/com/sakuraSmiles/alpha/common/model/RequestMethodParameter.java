@@ -1,4 +1,4 @@
-package com.groupA.alpha.common.model;
+package com.sakuraSmiles.alpha.common.model;
 
 /**
  * 请求参数

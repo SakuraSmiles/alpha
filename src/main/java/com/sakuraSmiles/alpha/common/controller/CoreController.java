@@ -2,7 +2,7 @@
  * 核心控制类
  * 
  */
-package com.groupA.alpha.common.controller;
+package com.sakuraSmiles.alpha.common.controller;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.groupA.alpha.common.model.User;
+import com.sakuraSmiles.alpha.common.model.User;
 
 
 

@@ -1,7 +1,7 @@
 /**
  * 用户模型
  */
-package com.groupA.alpha.common.model;
+package com.sakuraSmiles.alpha.common.model;
 
 public class User {
 	private String id;

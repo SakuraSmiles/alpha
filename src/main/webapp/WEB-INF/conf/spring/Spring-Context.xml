@@ -10,7 +10,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     
 	<!-- 搜索spring控件 -->
 	<!-- 告诉Spring不用管理@controller标记的类 -->
-	<context:component-scan base-package="com.groupA.*">
+	<context:component-scan base-package="com.sakuraSmiles.*">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 </beans>
