@@ -7,7 +7,7 @@
 	</div>
     <h2>Hello World</h2>
     <h3>
-     	<a href="hello">点击跳转</a>
+     	<a href="console">点击跳转</a>
     </h3>
 </body>
 <script type="text/javascript">

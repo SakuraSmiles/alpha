@@ -15,9 +15,6 @@
                         http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
                         http://www.springframework.org/schema/tx 
                         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
-
-
-
 	<!-- SpringMVC配置 -->          
 	
     <!-- 启动基于注解的HandlerMapping,可以将请求参数绑定到控制器参数 -->
