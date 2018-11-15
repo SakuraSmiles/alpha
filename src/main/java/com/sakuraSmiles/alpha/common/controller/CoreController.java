@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sakuraSmiles.alpha.common.model.User;
 
 
-
 @Controller
 @RequestMapping("/core")
 public class CoreController {

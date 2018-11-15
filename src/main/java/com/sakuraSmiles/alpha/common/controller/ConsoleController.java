@@ -30,7 +30,7 @@ import com.sakuraSmiles.alpha.common.model.RequestMethodParameter;
  */
 @Controller
 @RequestMapping("/console")
-public class ParamController {
+public class ConsoleController {
     @Autowired
     private RequestMappingHandlerMapping requestMappingHandlerMapping;
     
@@ -49,7 +49,7 @@ public class ParamController {
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("itemList", items);
-        mav.setViewName("jsp/console");
+        mav.setViewName("console");
         return mav;
 
     }
