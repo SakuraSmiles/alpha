@@ -13,16 +13,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.sakuraSmiles.alpha.common.model.User;
 
 
 @Controller
-@RequestMapping("/core")
 public class CoreController {
 	//存储用户信息
     private List<User> sList = new ArrayList<User>();
-
+    
+    //展示首页
+    @ResponseBody
+    @RequestMapping(value="index")
+    public ModelAndView showIndex(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("index");
+        return mav;
+    }
+    
+    
     //初始化
     public CoreController(){
         User s1 = new User("Sakura_Smile","123456");
