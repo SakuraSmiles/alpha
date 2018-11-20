@@ -1,4 +1,6 @@
-package com.sakuraSmiles.alpha.config;
+package com.sakuraSmiles.alpha.common.config;
+
+import java.text.SimpleDateFormat;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +11,9 @@ public class applicationReadyConfiguration implements ApplicationListener<Applic
 	private final static Logger logger = LoggerFactory.getLogger(applicationReadyConfiguration.class);
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
-    	logger.info("......applicationReadyConfiguration......");
+    	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	logger.info(getClass().getSimpleName());
+    	System.out.println("Application readied time is " + df.format(System.currentTimeMillis()));
     }
 
 }

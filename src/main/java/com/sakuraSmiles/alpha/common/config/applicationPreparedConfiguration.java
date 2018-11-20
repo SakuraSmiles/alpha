@@ -1,4 +1,4 @@
-package com.sakuraSmiles.alpha.config;
+package com.sakuraSmiles.alpha.common.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,9 +7,9 @@ import org.springframework.context.ApplicationListener;
 
 public class applicationPreparedConfiguration implements ApplicationListener<ApplicationPreparedEvent> {
 	private final static Logger logger = LoggerFactory.getLogger(applicationPreparedConfiguration.class);
-    @Override
+	@Override
     public void onApplicationEvent(ApplicationPreparedEvent event) {
-    	logger.info("......applicationPreparedConfiguration......");
+    	logger.info(getClass().getSimpleName());
     }
 
 }

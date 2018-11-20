@@ -1,4 +1,4 @@
-package com.sakuraSmiles.alpha.config;
+package com.sakuraSmiles.alpha.common.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,8 @@ public class applicationFailedConfiguration implements ApplicationListener<Appli
 	private final static Logger logger = LoggerFactory.getLogger(applicationFailedConfiguration.class);
     @Override
     public void onApplicationEvent(ApplicationFailedEvent event) {
-    	logger.info("......applicationFailedConfiguration......");
+    	logger.info(getClass().getSimpleName());
+    	System.out.println("Application start failed!");
     }
 
 }

@@ -31,8 +31,6 @@ public class CoreController {
         mav.setViewName("index");
         return mav;
     }
-    
-    
     //初始化
     public CoreController(){
         User s1 = new User("Sakura_Smile","123456");
