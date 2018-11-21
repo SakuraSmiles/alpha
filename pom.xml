@@ -52,6 +52,10 @@
 			<artifactId>maven-compiler-plugin</artifactId>
 			<configuration>
 				<encoding>UTF-8</encoding>
+				<!-- 过滤后缀为pem、pfx的证书文件 -->
+                        <nonFilteredFileExtensions>
+                                <nonFilteredFileExtension>keystore</nonFilteredFileExtension>
+                        </nonFilteredFileExtensions>
 			</configuration>
 		</plugin>
 		<plugin>
