@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -18,9 +19,9 @@ public class springMvcConfiguration extends WebMvcConfigurationSupport  {
 		super.addViewControllers(registry);
 		logger.info("index view loaded!");
 	}
-	 @Override
-	    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-	        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
-	        super.addResourceHandlers(registry);
-	    }
+	@Override
+	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+	    registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+	    super.addResourceHandlers(registry);
+	}
 }

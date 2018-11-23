@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,6 +40,20 @@ public class CoreController {
         sList.add(s1);
         sList.add(s2);
         sList.add(s3);
+    }
+    //用户登录
+    @ResponseBody
+    @RequestMapping(value="/login",method=RequestMethod.GET)
+    public Object login(@RequestParam(value = "loginName") String loginName,
+    					@RequestParam(value = "password") String password){
+    	for(User user : sList) {
+    		if(user.getLoginName().equals(loginName)&&user.getPassword().equals(password)) {
+    			System.out.println(loginName + " : login !"); 
+    			return "success";
+    		}
+    	}
+    	System.out.println(loginName + "/" + password + " : login faild!"); 
+        return "faild";
     }
     //查询所有
     @ResponseBody
