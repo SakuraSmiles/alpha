@@ -1,5 +1,9 @@
 package com.sakuraSmiles.alpha;
 
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -11,11 +15,13 @@ import com.sakuraSmiles.alpha.common.config.applicationPreparedConfiguration;
 import com.sakuraSmiles.alpha.common.config.applicationReadyConfiguration;
 import com.sakuraSmiles.alpha.common.config.applicationStartedConfiguration;
 import com.sakuraSmiles.alpha.common.config.applicationStartingConfiguration;
+import com.sakuraSmiles.alpha.common.dao.IBaseDAO;
 
 
 @SpringBootApplication
 public class alphaApplicaton {
 	private final static Logger logger = LoggerFactory.getLogger(alphaApplicaton.class);
+
 	public static void main(String[] args){
     	try{
     		SpringApplication application = initApplication();
@@ -40,5 +46,6 @@ public class alphaApplicaton {
 		application.addListeners(new applicationFailedConfiguration());
 		return application;
 	}
+	
 
 }
