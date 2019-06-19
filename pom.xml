@@ -39,6 +39,7 @@
     	<groupId>org.springframework.boot</groupId>
     	<artifactId>spring-boot-starter-thymeleaf</artifactId>
 	</dependency>
+	<!-- mysql dataSouce -->
 	<dependency>
 		<groupId>mysql</groupId>
 		<artifactId>mysql-connector-java</artifactId>
@@ -56,6 +57,12 @@
 		<groupId>com.alibaba</groupId>
 		<artifactId>druid</artifactId>
 		<version>1.0.25</version>
+	</dependency>
+	<!-- RestTemplate -->
+	<dependency>
+		<groupId>org.apache.httpcomponents</groupId>
+		<artifactId>httpclient</artifactId>
+		<version>4.5.6</version>
 	</dependency>
   </dependencies>
   <build>
