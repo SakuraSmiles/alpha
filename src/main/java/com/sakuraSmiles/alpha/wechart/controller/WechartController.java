@@ -1,11 +1,9 @@
-package com.sakuraSmiles.alpha.common.controller;
+package com.sakuraSmiles.alpha.wechart.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -13,7 +11,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,12 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.sakuraSmiles.alpha.common.model.User;
 
 
 @RestController
 public class WechartController{
-  private static final Logger logger = LoggerFactory.getLogger(WechartController.class);
+  private static final Logger logger = Logger.getLogger(WechartController.class);
   @Value("${wechart.appid}")
   private String appid;
   @Value("${wechart.secret}")
@@ -43,6 +39,7 @@ public class WechartController{
   @ResponseBody
   @RequestMapping(value="/jscode2session",method=RequestMethod.GET)
   public Object getOne(@RequestParam(value = "code") String code){
+	  logger.info(getClass().getSimpleName());
 	  RestTemplate restTemplate=new RestTemplate();
 	  HttpHeaders headers = new HttpHeaders();
 	  headers.setContentType(MediaType.APPLICATION_JSON_UTF8);

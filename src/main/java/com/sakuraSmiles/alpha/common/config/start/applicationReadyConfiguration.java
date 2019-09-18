@@ -1,14 +1,13 @@
-package com.sakuraSmiles.alpha.common.config;
+package com.sakuraSmiles.alpha.common.config.start;
 
 import java.text.SimpleDateFormat;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 
 public class applicationReadyConfiguration implements ApplicationListener<ApplicationReadyEvent> {
-	private final static Logger logger = LoggerFactory.getLogger(applicationReadyConfiguration.class);
+	private final static Logger logger = Logger.getLogger(applicationReadyConfiguration.class);
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
     	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

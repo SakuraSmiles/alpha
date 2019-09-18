@@ -1,7 +1,7 @@
 package com.sakuraSmiles.alpha.common.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 
 @Configuration
 public class springMvcConfiguration extends WebMvcConfigurationSupport  {
-	private final static Logger logger = LoggerFactory.getLogger(springMvcConfiguration.class);
+	private final static Logger logger = Logger.getLogger(springMvcConfiguration.class);
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry){
 		registry.addViewController("/").setViewName("forward:index");

@@ -7,6 +7,7 @@ package com.sakuraSmiles.alpha.common.controller;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,14 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sakuraSmiles.alpha.common.model.User;
+import com.sakuraSmiles.alpha.common.service.UserService;
+import com.sakuraSmiles.alpha.security.model.SysUser;
 
 
 @Controller
 public class CoreController {
 	//存储用户信息
-    private List<User> sList = new ArrayList<User>();
+    private List<SysUser> sList = new ArrayList<SysUser>();
     
+    UserService userserivce ;
     //展示首页
     @ResponseBody
     @RequestMapping(value="index")
@@ -34,27 +37,28 @@ public class CoreController {
     }
     //初始化
     public CoreController(){
-        User s1 = new User("Sakura_Smile","123456");
-        User s2 = new User("loginName2","123");
-        User s3 = new User("loginName3","123");
+        SysUser s1 = new SysUser("Sakura_Smile","123456");
+        SysUser s2 = new SysUser("loginName2","123");
+        SysUser s3 = new SysUser("loginName3","123");
         sList.add(s1);
         sList.add(s2);
         sList.add(s3);
     }
     //用户登录
-    @ResponseBody
-    @RequestMapping(value="/login",method=RequestMethod.GET)
-    public Object login(@RequestParam(value = "loginName") String loginName,
-    					@RequestParam(value = "password") String password){
-    	for(User user : sList) {
-    		if(user.getLoginName().equals(loginName)&&user.getPassword().equals(password)) {
-    			System.out.println(loginName + " : login !"); 
-    			return "success";
-    		}
-    	}
-    	System.out.println(loginName + "/" + password + " : login faild!"); 
-        return "faild";
-    }
+    // @ResponseBody
+    //@RequestMapping(value="/login",method=RequestMethod.GET)
+    //public Object login(@RequestParam(value = "loginName") String loginName,
+    //					@RequestParam(value = "password") String password){
+    //	for(SysUser SysUser : sList) {
+    //		if(SysUser.getLoginName().equals(loginName)&&SysUser.getPassword().equals(password)) {
+    //			System.out.println(loginName + " : login !"); 
+    //			return "success";
+    //		}
+    //	}
+    //	System.out.println(loginName + "/" + password + " : login faild!"); 
+    //   return "faild";
+    //}
+    
     //查询所有
     @ResponseBody
     @RequestMapping(value="/user",method=RequestMethod.GET)
@@ -67,8 +71,8 @@ public class CoreController {
     @RequestMapping(value="/user/{name}",method=RequestMethod.GET)
     public Object getOne(@PathVariable("name") String name){
         System.out.println("GET:"+name);
-        List<User> selectList = new ArrayList<User>();
-        for(User s : sList){
+        List<SysUser> selectList = new ArrayList<SysUser>();
+        for(SysUser s : sList){
             if(s.getName().equals(name)){
                 selectList.add(s);
             } 
@@ -79,26 +83,30 @@ public class CoreController {
     //添加
     @ResponseBody
     @RequestMapping(value="/user",method=RequestMethod.POST)
-    public Object post(@RequestBody User user){
+    public Object post(@RequestBody SysUser user){
+    	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    	String encodedPassword  = passwordEncoder.encode(user.getPassword());
+    	user.setPassword(encodedPassword);
+    	userserivce.saveUser(user);
         System.out.println("POST:"+user.getName());
-        sList.add(user);
+        //sList.add(SysUser);
         return sList;
     }
 
     //修改
     @ResponseBody
     @RequestMapping(value="/user/{name}",method=RequestMethod.PUT)
-    public Object put(@PathVariable("name") String name,@RequestBody User user){
+    public Object put(@PathVariable("name") String name,@RequestBody SysUser SysUser){
         System.out.println("PUT:"+name);
-        List<User> removeList = new ArrayList<User>();
-        for (User s : sList) {
+        List<SysUser> removeList = new ArrayList<SysUser>();
+        for (SysUser s : sList) {
             if(s.getName().equals(name)){
-                user.setName(s.getName());
+                SysUser.setName(s.getName());
                 removeList.add(s);  
             }
         }
         sList.removeAll(removeList);
-        sList.add(user);
+        sList.add(SysUser);
         return sList;
     }
 
@@ -116,8 +124,8 @@ public class CoreController {
     @RequestMapping(value="/user/{name}",method=RequestMethod.DELETE)
     public Object delete(@PathVariable("name") String name){
         System.out.println("DELETE:"+name);
-        List<User> removeList = new ArrayList<User>();
-        for (User s : sList) {
+        List<SysUser> removeList = new ArrayList<SysUser>();
+        for (SysUser s : sList) {
             if(s.getName().equals(name)){
                 removeList.add(s);  
             }

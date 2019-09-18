@@ -1,26 +1,20 @@
 package com.sakuraSmiles.alpha;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.sakuraSmiles.alpha.common.config.applicationEnvironmentPreparedConfiguration;
-import com.sakuraSmiles.alpha.common.config.applicationFailedConfiguration;
-import com.sakuraSmiles.alpha.common.config.applicationPreparedConfiguration;
-import com.sakuraSmiles.alpha.common.config.applicationReadyConfiguration;
-import com.sakuraSmiles.alpha.common.config.applicationStartedConfiguration;
-import com.sakuraSmiles.alpha.common.config.applicationStartingConfiguration;
-import com.sakuraSmiles.alpha.common.dao.IBaseDAO;
+import com.sakuraSmiles.alpha.common.config.start.applicationEnvironmentPreparedConfiguration;
+import com.sakuraSmiles.alpha.common.config.start.applicationFailedConfiguration;
+import com.sakuraSmiles.alpha.common.config.start.applicationPreparedConfiguration;
+import com.sakuraSmiles.alpha.common.config.start.applicationReadyConfiguration;
+import com.sakuraSmiles.alpha.common.config.start.applicationStartedConfiguration;
+import com.sakuraSmiles.alpha.common.config.start.applicationStartingConfiguration;
 
 
 @SpringBootApplication
 public class alphaApplicaton {
-	private final static Logger logger = LoggerFactory.getLogger(alphaApplicaton.class);
+	private final static Logger logger = Logger.getLogger(alphaApplicaton.class);
 
 	public static void main(String[] args){
     	try{
