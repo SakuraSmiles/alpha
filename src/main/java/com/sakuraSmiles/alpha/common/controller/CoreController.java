@@ -5,15 +5,17 @@
 package com.sakuraSmiles.alpha.common.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,8 +27,17 @@ import com.sakuraSmiles.alpha.security.model.SysUser;
 public class CoreController {
 	//存储用户信息
     private List<SysUser> sList = new ArrayList<SysUser>();
-    
-    UserService userserivce ;
+	@Autowired
+	UserService userserivce;
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
+	@RequestMapping("hello")
+	public List<Map<String, Object>> hello() {
+		List<Map<String, Object>> list = jdbcTemplate.queryForList("SELECT * from sys_user ", new Object[] {});
+		System.out.println(list.toString());
+		return list;
+	}
     //展示首页
     @ResponseBody
     @RequestMapping(value="index")
@@ -37,20 +48,21 @@ public class CoreController {
     }
     //初始化
     public CoreController(){
-        SysUser s1 = new SysUser("Sakura_Smile","123456");
-        SysUser s2 = new SysUser("loginName2","123");
-        SysUser s3 = new SysUser("loginName3","123");
+    	SysUser s1 = new SysUser("Sakura_Smile","123456");
+    	SysUser s2 = new SysUser("loginName2","123");
+    	SysUser s3 = new SysUser("loginName3","123");
         sList.add(s1);
         sList.add(s2);
         sList.add(s3);
     }
+
     //用户登录
     // @ResponseBody
     //@RequestMapping(value="/login",method=RequestMethod.GET)
     //public Object login(@RequestParam(value = "loginName") String loginName,
     //					@RequestParam(value = "password") String password){
-    //	for(SysUser SysUser : sList) {
-    //		if(SysUser.getLoginName().equals(loginName)&&SysUser.getPassword().equals(password)) {
+    //	for(User User : sList) {
+    //		if(User.getLoginName().equals(loginName)&&User.getPassword().equals(password)) {
     //			System.out.println(loginName + " : login !"); 
     //			return "success";
     //		}
@@ -64,7 +76,8 @@ public class CoreController {
     @RequestMapping(value="/user",method=RequestMethod.GET)
     public Object getAll(){
         System.out.println("GET:ALL"); 
-        return sList;
+        List<SysUser> users= userserivce.getAllUsers();
+        return users;
     }
     //查询单个
     @ResponseBody
@@ -89,24 +102,24 @@ public class CoreController {
     	user.setPassword(encodedPassword);
     	userserivce.saveUser(user);
         System.out.println("POST:"+user.getName());
-        //sList.add(SysUser);
+        //sList.add(User);
         return sList;
     }
 
     //修改
     @ResponseBody
     @RequestMapping(value="/user/{name}",method=RequestMethod.PUT)
-    public Object put(@PathVariable("name") String name,@RequestBody SysUser SysUser){
+    public Object put(@PathVariable("name") String name,@RequestBody SysUser User){
         System.out.println("PUT:"+name);
         List<SysUser> removeList = new ArrayList<SysUser>();
         for (SysUser s : sList) {
             if(s.getName().equals(name)){
-                SysUser.setName(s.getName());
+                User.setName(s.getName());
                 removeList.add(s);  
             }
         }
         sList.removeAll(removeList);
-        sList.add(SysUser);
+        sList.add(User);
         return sList;
     }
 

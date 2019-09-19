@@ -20,12 +20,25 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
+
 @Entity
 public class SysUser implements UserDetails {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	public SysUser() {
+	}
+
+	// 此方法会将默认的无参构造方法给覆盖掉，必须加上上面的无参构造方法
+	public SysUser(String loginName, String password) {
+		super();
+		this.loginName = loginName;
+		this.password = password;
+	}
+
 	@Id
 	@GeneratedValue
 	private String id;
@@ -44,16 +57,6 @@ public class SysUser implements UserDetails {
 
 	@ManyToMany(cascade = { CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	private List<SysRole> roles;
-
-	public SysUser() {
-	}
-
-	// 此方法会将默认的无参构造方法给覆盖掉，必须加上上面的无参构造方法
-	public SysUser(String loginName, String password) {
-		super();
-		this.loginName = loginName;
-		this.password = password;
-	}
 
 	public String getId() {
 		return id;
@@ -103,13 +106,29 @@ public class SysUser implements UserDetails {
 		this.password = password;
 	}
 
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public List<SysRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<SysRole> roles) {
+		this.roles = roles;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		List<SysRole> roles = this.getRoles();
-        for (SysRole role : roles) {
-        	authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
+		for (SysRole role : roles) {
+			authorities.add(new SimpleGrantedAuthority(role.getName()));
+		}
 		return authorities;
 	}
 
@@ -140,21 +159,5 @@ public class SysUser implements UserDetails {
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-	public List<SysRole> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<SysRole> roles) {
-		this.roles = roles;
 	}
 }
