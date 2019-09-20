@@ -19,11 +19,17 @@ public class UserService {
 	public void saveUser(SysUser user) {
 		userRepository.save(user);
 	}
+
 	public List<SysUser> getAllUsers() {
 		return userRepository.findAll();
 	}
 	public SysUser getUserByLoginname(String loginname) {
 		return userRepository.findByLoginName(loginname);
 	}
-
+	public SysUser getUserByPhone(String phone) {
+		return userRepository.findByPhone(phone);
+	}
+	public SysUser getUserByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
 }

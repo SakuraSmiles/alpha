@@ -18,13 +18,24 @@ public class SecurityService implements UserDetailsService  {
     SysUserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        SysUser user = userRepository.findByLoginName(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("该用户不存在！");
-        }
-        System.out.println("loginName:"+username);
-        System.out.println("userName:"+user.getName()+";password:"+user.getPassword());
-        return user;
-    }
+    public UserDetails loadUserByUsername(String ssoId) throws UsernameNotFoundException {
+		SysUser user = userRepository.findByLoginName(ssoId);
+		if (user == null) {
+			user = userRepository.findByPhone(ssoId);
+			if (user == null) {
+				user = userRepository.findByEmail(ssoId);
+				if (user == null) {
+					throw new UsernameNotFoundException("该用户不存在！");
+				} else {
+					System.out.println("email:" + ssoId);
+				}
+			} else {
+				System.out.println("phone:" + ssoId);
+			}
+		} else {
+			System.out.println("loginName:" + ssoId);
+		}
+		System.out.println("userName:" + user.getName() + ";password:" + user.getPassword());
+		return user;
+	}
 }

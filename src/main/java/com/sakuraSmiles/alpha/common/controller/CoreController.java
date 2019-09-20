@@ -24,6 +24,7 @@ import com.sakuraSmiles.alpha.security.model.SysUser;
 
 
 @Controller
+@RequestMapping("/api")
 public class CoreController {
 	//存储用户信息
     private List<SysUser> sList = new ArrayList<SysUser>();
@@ -84,13 +85,8 @@ public class CoreController {
     @RequestMapping(value="/user/{name}",method=RequestMethod.GET)
     public Object getOne(@PathVariable("name") String name){
         System.out.println("GET:"+name);
-        List<SysUser> selectList = new ArrayList<SysUser>();
-        for(SysUser s : sList){
-            if(s.getName().equals(name)){
-                selectList.add(s);
-            } 
-        }
-        return selectList;
+        SysUser user = userserivce.getUserByLoginname(name);
+        return user;
     }
 
     //添加

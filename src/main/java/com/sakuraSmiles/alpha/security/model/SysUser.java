@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.SecondaryTable;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,6 +23,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 @Entity
+@SecondaryTable(name="sys_user_extend")
 public class SysUser implements UserDetails {
 
 	/**
@@ -42,18 +44,53 @@ public class SysUser implements UserDetails {
 	@Id
 	@GeneratedValue
 	private String id;
-	@Column
+	@Column(unique=true ,nullable = false)
 	private String loginName;
-	@Column
+	@Column(nullable = false)
 	private String password;
-	@Column
+	@Column(unique=true ,nullable = false)
 	private String name;
-	@Column
+	@Column(unique=true)
 	private String email;
-	@Column
+	@Column(unique=true)
 	private String phone;
 	@Column
 	private String remark;
+	@Column
+	private String lastLoginTime;
+	@Column(nullable = false)
+	private String isActive = "true";
+	@Column(table="sys_user_extend")
+	private String level;
+	@Column(table="sys_user_extend")
+	private String currentExperience;
+	@Column(table="sys_user_extend")
+	private String totalExperience;
+	 
+
+	public String getLastLoginTime() {
+		return lastLoginTime;
+	}
+
+	public void setLastLoginTime(String lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+
+	public String getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
 
 	@ManyToMany(cascade = { CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	private List<SysRole> roles;
