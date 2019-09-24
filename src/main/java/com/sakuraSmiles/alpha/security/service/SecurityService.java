@@ -19,6 +19,7 @@ public class SecurityService implements UserDetailsService  {
 
     @Override
     public UserDetails loadUserByUsername(String ssoId) throws UsernameNotFoundException {
+
 		SysUser user = userRepository.findByLoginName(ssoId);
 		if (user == null) {
 			user = userRepository.findByPhone(ssoId);
@@ -35,7 +36,9 @@ public class SecurityService implements UserDetailsService  {
 		} else {
 			System.out.println("loginName:" + ssoId);
 		}
-		System.out.println("userName:" + user.getName() + ";password:" + user.getPassword());
+		System.out.println("userName:" + user.getName());
+		System.out.println("password:" + user.getPassword());
+
 		return user;
 	}
 }

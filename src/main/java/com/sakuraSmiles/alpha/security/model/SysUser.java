@@ -66,7 +66,8 @@ public class SysUser implements UserDetails {
 	private String currentExperience;
 	@Column(table="sys_user_extend")
 	private String totalExperience;
-	 
+	@ManyToMany(cascade = { CascadeType.REFRESH }, fetch = FetchType.EAGER)
+	private List<SysRole> roles;
 
 	public String getLastLoginTime() {
 		return lastLoginTime;
@@ -92,8 +93,6 @@ public class SysUser implements UserDetails {
 		this.level = level;
 	}
 
-	@ManyToMany(cascade = { CascadeType.REFRESH }, fetch = FetchType.EAGER)
-	private List<SysRole> roles;
 
 	public String getId() {
 		return id;

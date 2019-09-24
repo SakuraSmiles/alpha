@@ -15,6 +15,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sakuraSmiles.alpha.security.model.SysUser;
 import com.sakuraSmiles.alpha.security.repository.SysUserRepository;
 
 @Component
@@ -27,14 +28,17 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
         PrintWriter out = httpServletResponse.getWriter();
         ObjectMapper objectMapper = new ObjectMapper();
         String loginname = authentication.getName();
-        this.updateLastLoginTime(authentication.getPrincipal());
+        this.updateLastLoginTime((SysUser)authentication.getPrincipal());
         String s = "{\"status\":\"200\",\"msg\":" + objectMapper.writeValueAsString("登录成功！") + ",\"info\":{\"name\":" + loginname + "}}";
         out.write(s);
         out.flush();
         out.close();
     }
-    private void updateLastLoginTime(Object object) {
+    private void updateLastLoginTime(SysUser user) {
     	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String currentTime = df.format(new Date());// new Date()为获取当前系统时间
+        System.out.println("登陆时间: " + currentTime);
+        user.setLastLoginTime(currentTime);
+        userRepository.save(user);
     }
 }
