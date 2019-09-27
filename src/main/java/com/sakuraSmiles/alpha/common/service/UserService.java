@@ -19,7 +19,10 @@ public class UserService {
 	public void saveUser(SysUser user) {
 		userRepository.save(user);
 	}
-
+	public boolean deleteUser(SysUser user) {
+		userRepository.delete(user);
+		return true;
+	}
 	public List<SysUser> getAllUsers() {
 		return userRepository.findAll();
 	}
@@ -31,5 +34,11 @@ public class UserService {
 	}
 	public SysUser getUserByEmail(String email) {
 		return userRepository.findByEmail(email);
+	}
+	public Long getMaxUid() {
+		return userRepository.getMaxUid();
+	}
+	public int getUserCount(){
+		return userRepository.getUserCount();
 	}
 }

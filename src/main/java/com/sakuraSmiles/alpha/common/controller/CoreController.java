@@ -4,21 +4,28 @@
  */
 package com.sakuraSmiles.alpha.common.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.sakuraSmiles.alpha.common.service.UserService;
 
 
 @Controller
 public class CoreController {
+	@Value("${application.version}")//后台版本号
+	String version;
+	@Value("${application.status}")//后台状态，可在配置文件中修改
+	String status;
+	
 	@Autowired
 	UserService userserivce;
 	@Autowired
@@ -30,12 +37,21 @@ public class CoreController {
 		System.out.println(list.toString());
 		return list;
 	}
-    //展示首页
+    //查询所有
     @ResponseBody
-    @RequestMapping(value="index")
-    public ModelAndView showIndex(){
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("index");
-        return mav;
+    @RequestMapping(value="index",method=RequestMethod.GET)
+    public Object getPlatformMsg(){
+    	HashMap<String,Object> platform=new HashMap<>();
+    	platform.put("version", version);
+    	platform.put("status", status);
+        return platform;
     }
+    //展示首页
+//    @ResponseBody
+//    @RequestMapping(value="index")
+//    public ModelAndView showIndex(){
+//        ModelAndView mav = new ModelAndView();
+//        mav.setViewName("index");
+//        return mav;
+//    }
 }

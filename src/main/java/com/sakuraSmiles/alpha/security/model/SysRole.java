@@ -4,10 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
+@GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 public class SysRole {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "jpa-uuid")
 	private String id;
 	private String name;
 

@@ -16,14 +16,18 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.SecondaryTable;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
 @Entity
 @SecondaryTable(name="sys_user_extend")
+@GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 public class SysUser implements UserDetails {
 
 	/**
@@ -42,8 +46,10 @@ public class SysUser implements UserDetails {
 	}
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "jpa-uuid")
 	private String id;
+	@Column(unique=true)
+	private Long uid;
 	@Column(unique=true ,nullable = false)
 	private String loginName;
 	@Column(nullable = false)
@@ -58,6 +64,12 @@ public class SysUser implements UserDetails {
 	private String remark;
 	@Column
 	private String lastLoginTime;
+	@Column
+	private String lastLoginIp;
+	@Column
+	private String currentLoginTime;
+	@Column
+	private String currentLoginIp;
 	@Column(nullable = false)
 	private String isActive = "true";
 	@Column(table="sys_user_extend")
@@ -68,6 +80,61 @@ public class SysUser implements UserDetails {
 	private String totalExperience;
 	@ManyToMany(cascade = { CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	private List<SysRole> roles;
+
+	public Long getUid() {
+		return uid;
+	}
+
+	public void setUid(Long uid) {
+		this.uid = uid;
+	}
+	public String getLastLoginIp() {
+		return lastLoginIp;
+	}
+
+	public void setLastLoginIp(String lastLoginIp) {
+		this.lastLoginIp = lastLoginIp;
+	}
+
+	public String getCurrentLoginTime() {
+		return currentLoginTime;
+	}
+
+	public void setCurrentLoginTime(String currentLoginTime) {
+		this.currentLoginTime = currentLoginTime;
+	}
+
+	public String getCurrentLoginIp() {
+		return currentLoginIp;
+	}
+
+	public void setCurrentLoginIp(String currentLoginIp) {
+		this.currentLoginIp = currentLoginIp;
+	}
+
+	public String getCurrentExperience() {
+		return currentExperience;
+	}
+
+	public void setCurrentExperience(String currentExperience) {
+		this.currentExperience = currentExperience;
+	}
+
+	public String getTotalExperience() {
+		return totalExperience;
+	}
+
+	public void setTotalExperience(String totalExperience) {
+		this.totalExperience = totalExperience;
+	}
+
+	public List<SysRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<SysRole> roles) {
+		this.roles = roles;
+	}
 
 	public String getLastLoginTime() {
 		return lastLoginTime;
@@ -92,7 +159,6 @@ public class SysUser implements UserDetails {
 	public void setLevel(String level) {
 		this.level = level;
 	}
-
 
 	public String getId() {
 		return id;
@@ -150,18 +216,11 @@ public class SysUser implements UserDetails {
 		this.remark = remark;
 	}
 
-	public List<SysRole> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<SysRole> roles) {
-		this.roles = roles;
-	}
-
 	@Override
+	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		List<SysRole> roles = this.getRoles();
+		List<SysRole> roles = this.roles;
 		for (SysRole role : roles) {
 			authorities.add(new SimpleGrantedAuthority(role.getName()));
 		}

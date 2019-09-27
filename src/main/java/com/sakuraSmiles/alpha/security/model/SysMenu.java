@@ -10,10 +10,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
+@GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 public class SysMenu {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "jpa-uuid")
 	private String id;
 	@Column
 	private String url;
