@@ -37,7 +37,7 @@ public class CoreController {
 		System.out.println(list.toString());
 		return list;
 	}
-    //查询所有
+    //为首页提供后台服务基本相关信息
     @ResponseBody
     @RequestMapping(value="index",method=RequestMethod.GET)
     public Object getPlatformMsg(){
