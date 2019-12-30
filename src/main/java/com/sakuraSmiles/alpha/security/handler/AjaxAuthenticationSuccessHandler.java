@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sakuraSmiles.alpha.common.util.IpUtil;
+import com.sakuraSmiles.alpha.utils.IpUtil;
 import com.sakuraSmiles.alpha.security.model.SysUser;
 import com.sakuraSmiles.alpha.security.repository.SysUserRepository;
 
@@ -24,7 +24,7 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 	@Autowired
     SysUserRepository userRepository;
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException {
         httpServletResponse.setContentType("application/json;charset=utf-8");
         PrintWriter out = httpServletResponse.getWriter();
         ObjectMapper objectMapper = new ObjectMapper();
